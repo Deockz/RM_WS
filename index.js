@@ -8,6 +8,10 @@ app.get('/', (req, res) => {
   res.render('index.ejs')
 })
 
+app.get('/objectives', (req, res) => {
+    res.render('objectives.ejs')
+  })
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
