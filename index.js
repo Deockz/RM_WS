@@ -9,64 +9,65 @@ env.config();
 app.use(bodyParser.urlencoded({ extended: false }))
 
 var haMessage;
-var authReq = false;
+var haConnected = false;
 var idHA = 1;
-
-//Acceso a websocket------------------------------------------------------------
 const haToken = process.env.HA_TOKEN;
-const wbSkt = new WebSocket(process.env.HA_URL);
+const authPayload = {
+    type: "auth",
+    access_token: haToken,
+  };
+var wbSckt;
 
-function send(payload) {
-    wbSkt.send(JSON.stringify(payload));
+
+//HomeAssistant websocket------------------------------------------------------------
+
+function connect(){
+    var wbSkt = new WebSocket(process.env.HA_URL);
+    wbSkt.onopen = async function (event) {
+        console.log("WebSocket connection opened:", event);
+        wbSkt.send(JSON.stringify(authPayload))
+    };
+    wbSkt.addEventListener("message", (event) => {
+        const data = JSON.parse(event.data);
+
+        if (data.type === "event") {
+            console.log("Event", data.event.event_type, data.event.data.entity_id, data.event.data);
+        } else {
+            console.log("message", data);
+        }
+    });
+    haConnected = true;
+    return wbSkt
 }
 
-function ping() {
-    send({
-        id:idHA,
-        type: "ping",
-      });
-    idHA++;
+
+function send(payload,socket) {
+    socket.send(JSON.stringify(payload));
 }
 
 
-function turnLight(){
+function turnLight(entity,action,socket){
     send({
         id:idHA,
         type: "call_service",
         domain: "light",
-        service:"turn_on",
-        service_data: {
-            brightness:255
-        },
+        service:"turn_"+ action,
         target:{
-            entity_id:"light.hue_color_lamp_1_2"
+            entity_id:entity
         }
         
-      });
+      },socket);
     idHA++;
 }
 
-function authenticate() {
-    send({
-      type: "auth",
-      access_token: haToken,
-    });
-  }
 
-wbSkt.addEventListener("message", (event) => {
-    const data = JSON.parse(event.data);
+function closeConnection(socket){
+    socket.close();
+    haConnected = false;
+    console.log('End connection')
+}
 
-    if (data.type === "event") {
-        console.log("Event", data.event.event_type, data.event.data.entity_id, data.event.data);
-    } else {
-        console.log("message", data);
-    }
-});
 
-wbSkt.onopen = async function (event) {
-    console.log("WebSocket connection opened:", event);
-    authenticate();
-};
 
 //End websocket------------------------------------------------------------------
 
@@ -91,10 +92,16 @@ app.post('/action', (req, res) => {
     }else{
         try {
             if (req.body.action == 'connect') {
-                ping();
+                wbSckt = connect();
             }
-            if (req.body.action == 'cuarto') {
-                turnLight();
+            if (req.body.action == 'disconnect') {
+                closeConnection(wbSckt);
+            }
+            if (req.body.action == 'cuartoOn') {
+                turnLight('light.hue_color_lamp_1_2','on',wbSckt);
+            }
+            if (req.body.action == 'cuartoOff') {
+                turnLight('light.hue_color_lamp_1_2','off',wbSckt);
             }
         } catch (error) {
             console.log(error)
