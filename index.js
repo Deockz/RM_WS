@@ -1,12 +1,22 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import env from "dotenv";
+import pg from 'pg';
 
 const app = express()
 const port = 3000
 
 env.config();
+
 app.use(bodyParser.urlencoded({ extended: false }))
+const client = new pg.Client({
+    user: 'deockz',
+    password: 'deockz15psswrd',
+    host: '127.0.0.1',
+    port: 5432,
+    database: 'homeServer',
+})
+
 
 var haMessage;
 var haConnected = false;
