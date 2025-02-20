@@ -10,13 +10,19 @@ env.config();
 
 app.use(bodyParser.urlencoded({ extended: false }))
 const client = new pg.Client({
-    user: 'deockz',
-    password: 'deockz15psswrd',
-    host: '127.0.0.1',
-    port: 5432,
-    database: 'homeServer',
+    user: process.env.DBUSER,
+    password: process.env.DBPSSWRD,
+    host: process.env.DBHOST,
+    port: process.env.DBPORT,
+    database: process.env.DBNAME,
 })
 
+
+async function checkItems() {
+  const result = await client.query('SELECT * FROM users');
+  console.log( result.rows);  
+}
+checkItems()
 
 var haMessage;
 var haConnected = false;
