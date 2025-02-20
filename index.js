@@ -16,7 +16,7 @@ const client = new pg.Client({
     port: process.env.DBPORT,
     database: process.env.DBNAME,
 })
-
+client.connect()
 
 async function checkItems() {
   const result = await client.query('SELECT * FROM users');
