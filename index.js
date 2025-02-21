@@ -18,11 +18,7 @@ const client = new pg.Client({
 })
 client.connect()
 
-async function checkItems() {
-  const result = await client.query('SELECT * FROM users');
-  console.log( result.rows);  
-}
-checkItems()
+
 
 var haMessage;
 var haConnected = false;
@@ -37,7 +33,18 @@ var wbSckt;
 
 //Book History with Postgres database
 
-
+async function checkItems() {
+    const result = await client.query('SELECT * FROM users');
+    console.log( result.rows);  
+  }
+  
+  async function addBook(data) {
+      let info = await client.query(
+          "INSERT INTO books (title,author,readdate,summary,score) VALUES ($1, $2,$3,$4,$5) RETURNING id", 
+          [data.title,data.author,data.readDate,data.summary,data.score]    
+      );
+    }
+  
 
 //End------------------------------------------------------------------
 
@@ -137,6 +144,12 @@ app.get('/books', (req, res) => {
 app.get('/books/new', (req, res) => {
     res.render('newBook.ejs')
     })
+
+app.post('/books/new',(req, res) => {
+    addBook(req.body)
+    res.redirect('/books');
+})
+
 
 //End------------------------------------------------------------------
     
