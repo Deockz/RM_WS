@@ -1,0 +1,38 @@
+<%- include('partials/header.ejs'); -%>
+
+<div class="container">
+    <div class="container d-flex flex-wrap justify-content-center">
+        <h2 >What book did you read?</h2>
+    </div>
+    <%= data.title %>
+    <form action="/books/editBook" method="post">
+        <input type="hidden" name="id" value="<%= data.id %>">
+        <div class="mb-3">
+        <label for="bookTitle" class="form-label">Book Title</label>
+        <input value="<%= data.title %>" type="text" class="form-control" id="bookTitle"  name="title">
+        </div>
+        <div class="mb-3">
+            <label for="bookAuthor" class="form-label">Author</label>
+            <input value="<%= data.author %>" type="text" class="form-control" id="bookAuthor"  name="author">
+        </div>
+        <div class="mb-3">
+            <label for="bookDate" class="form-label">When did you finish it?</label>
+            <input value="<%= data.readdate %>" type="date" class="form-control" id="bookDate"  name="readDate">
+        </div>
+        <div class="mb-3">
+            <label for="bookSummary" class="form-label">Opinion</label>
+            <input value="<%= data.summary %>" type="text" class="form-control" id="bookSummary"  name="summary">
+        </div>
+        <div class="mb-3">
+            <label for="bookScore" class="form-label">Score</label>
+            <input value="<%= data.score %>" type="number" class="form-control" id="bookScore"  name="score">
+        </div>
+
+        <div class="container d-flex flex-wrap justify-content-center">
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </div>
+    </form>
+</div>
+
+
+<%- include('partials/footer.ejs'); -%>

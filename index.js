@@ -33,17 +33,17 @@ var wbSckt;
 
 //Book History with Postgres database
 
-async function checkItems() {
-    const result = await client.query('SELECT * FROM users');
-    console.log( result.rows);  
-  }
-  
-  async function addBook(data) {
-      let info = await client.query(
-          "INSERT INTO books (title,author,readdate,summary,score) VALUES ($1, $2,$3,$4,$5) RETURNING id", 
-          [data.title,data.author,data.readDate,data.summary,data.score]    
-      );
-    }
+async function checkBooks() {
+    const result = await client.query('SELECT * FROM books');
+    return result;
+}
+
+async function addBook(data) {
+    let info = await client.query(
+        "INSERT INTO books (title,author,readdate,summary,score) VALUES ($1, $2,$3,$4,$5) RETURNING id", 
+        [data.title,data.author,data.readDate,data.summary,data.score]    
+    );
+}
   
 
 //End------------------------------------------------------------------
@@ -137,15 +137,33 @@ app.post('/action', (req, res) => {
     res.redirect('/smartHome')
 })
 
-app.get('/books', (req, res) => {
-    res.render('books.ejs')
+app.get('/books', async (req, res) => {
+    let data = await checkBooks();
+    res.render('books.ejs', {books : data.rows})
     })
+
+app.post('/books/edit', async (req, res) => {
+    let info = await client.query('SELECT * FROM books WHERE id=$1',[req.body.book]);
+    let book = info.rows[0]
+    console.log(book)
+    res.render('editBook.ejs',{data:book})
+})
+
+
+app.post('/books/editBook', async (req, res) => {
+    console.log(req.body.score)
+    let newData = req.body;
+    await client.query('UPDATE books SET title=$1,author=$2,readdate=$3,summary=$4,score=$5 WHERE id=$6',
+        [newData.title,newData.author,newData.readDate,newData.summary,newData.score,newData.id]);
+    res.redirect('/books')
+
+})
 
 app.get('/books/new', (req, res) => {
     res.render('newBook.ejs')
     })
 
-app.post('/books/new',(req, res) => {
+app.post('/books/delete',(req, res) => {
     addBook(req.body)
     res.redirect('/books');
 })
