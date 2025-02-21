@@ -11,7 +11,7 @@ env.config();
 app.use(bodyParser.urlencoded({ extended: false }))
 const client = new pg.Client({
     user: process.env.DBUSER,
-    password: process.env.DBPSSWRD,
+    password: process.env.DBPASSWORD,
     host: process.env.DBHOST,
     port: process.env.DBPORT,
     database: process.env.DBNAME,
@@ -35,6 +35,13 @@ const authPayload = {
 var wbSckt;
 
 
+//Book History with Postgres database
+
+
+
+//End------------------------------------------------------------------
+
+
 //HomeAssistant websocket------------------------------------------------------------
 
 function connect(){
@@ -56,11 +63,9 @@ function connect(){
     return wbSkt
 }
 
-
 function send(payload,socket) {
     socket.send(JSON.stringify(payload));
 }
-
 
 function turnLight(entity,action,socket){
     send({
@@ -76,17 +81,16 @@ function turnLight(entity,action,socket){
     idHA++;
 }
 
-
 function closeConnection(socket){
     socket.close();
     haConnected = false;
     console.log('End connection')
 }
 
+//End------------------------------------------------------------------
 
 
-//End websocket------------------------------------------------------------------
-
+//Express services----------------------------------------------------------------------
 app.get('/', (req, res) => {
   res.render('index.ejs')
 })
@@ -125,6 +129,16 @@ app.post('/action', (req, res) => {
     }
     res.redirect('/smartHome')
 })
+
+app.get('/books', (req, res) => {
+    res.render('books.ejs')
+    })
+
+app.get('/books/new', (req, res) => {
+    res.render('newBook.ejs')
+    })
+
+//End------------------------------------------------------------------
     
 
 app.listen(port, () => {
