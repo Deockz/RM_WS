@@ -149,7 +149,6 @@ app.post('/books/edit', async (req, res) => {
     res.render('editBook.ejs',{data:book})
 })
 
-
 app.post('/books/editBook', async (req, res) => {
     console.log(req.body.score)
     let newData = req.body;
@@ -163,8 +162,9 @@ app.get('/books/new', (req, res) => {
     res.render('newBook.ejs')
     })
 
-app.post('/books/delete',(req, res) => {
-    addBook(req.body)
+app.post('/books/delete', async (req, res) => {
+    let bookID = req.body.book
+    await client.query('DELETE FROM books WHERE id=$1',[bookID]);
     res.redirect('/books');
 })
 

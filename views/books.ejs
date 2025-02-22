@@ -28,7 +28,12 @@
         <form action="/books/edit" method="post" style="width: 10rem;">
           <button value="<%= book.id %>" name="book" type="submit" class="btn btn-primary px-4 gap-3 " >Edit</button>
         </form>
-        <a href="/books/delete" type="button" class="btn btn-primary px-4" style="width: 10rem;">Delete</a>
+        <form action="/books/delete" method="post" style="width: 10rem;">
+          <button value="<%= book.id %>" name="book" type="submit" class="btn btn-primary px-4 gap-3 " onclick="return confirm('Are you sure?')" >
+          Delete
+          </button>
+        </form>
+        
       </div>
     </div>
   </div>
