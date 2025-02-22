@@ -18,8 +18,6 @@ const client = new pg.Client({
 })
 client.connect()
 
-
-
 var haMessage;
 var haConnected = false;
 var idHA = 1;
@@ -29,7 +27,7 @@ const authPayload = {
     access_token: haToken,
   };
 var wbSckt;
-
+var sort = 'author';
 
 //Book History with Postgres database
 
@@ -44,7 +42,29 @@ async function addBook(data) {
         [data.title,data.author,data.readDate,data.summary,data.score]    
     );
 }
-  
+
+function sortItems (items,criteria){
+    let aux = []
+    for (let i = 0; i < items.length -1; i++) {
+      for (let j = 0; j < items.length -1; j++) {
+        if(criteria == 'score' || criteria == 'read_date'){
+          if (eval('items[j].' + criteria) < eval('items[j+1].' + criteria)) {
+            aux = items[j];
+            items[j] = items[j+1];
+            items[j+1] = aux;
+          } 
+        }else{
+          if (eval('items[j].' + criteria) > eval('items[j+1].' + criteria)) {
+            aux = items[j];
+            items[j] = items[j+1];
+            items[j+1] = aux;
+          } 
+        }
+            
+      }
+    }
+    return items;
+  }
 
 //End------------------------------------------------------------------
 
@@ -139,8 +159,15 @@ app.post('/action', (req, res) => {
 
 app.get('/books', async (req, res) => {
     let data = await checkBooks();
-    res.render('books.ejs', {books : data.rows})
+    res.render('books.ejs', {books : data.rows,order:sort})
     })
+
+app.post('/books',async (req,res)=>{
+    let data = await checkBooks();
+    let option = req.body.sortOption
+    data = sortItems(data.rows,option)
+    res.render('books.ejs', {books : data})
+})
 
 app.post('/books/edit', async (req, res) => {
     let info = await client.query('SELECT * FROM books WHERE id=$1',[req.body.book]);
@@ -167,7 +194,6 @@ app.post('/books/delete', async (req, res) => {
     await client.query('DELETE FROM books WHERE id=$1',[bookID]);
     res.redirect('/books');
 })
-
 
 //End------------------------------------------------------------------
     
