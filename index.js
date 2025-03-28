@@ -189,6 +189,11 @@ app.get('/books/new', (req, res) => {
     res.render('newBook.ejs')
     })
 
+app.post('/books/new',(req, res) => {
+    addBook(req.body)
+    res.redirect('/books');
+})
+
 app.post('/books/delete', async (req, res) => {
     let bookID = req.body.book
     await client.query('DELETE FROM books WHERE id=$1',[bookID]);
