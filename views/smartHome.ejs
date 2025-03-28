@@ -1,50 +1,156 @@
 <%- include('partials/header.ejs'); -%>
 
 
-<div class="container px-4 py-5" id="icon-grid">
-    <form action="/action" method="POST">
-        <h2 class="pb-2 border-bottom">Smart Home Control 
-            <button type="submit" class="btn  text-black px-3 " name="action" value="connect" width="1.75em" height="1.75em">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-            </svg>
-            Connect
-            </button>
-            <button type="submit" class="btn  text-black px-3 " name="action" value="disconnect" width="1.75em" height="1.75em">
+<div class="px-4 py-2 m-3" id="icon-grid">
+
+    <!--Div para barra de titulo-->
+    <div class="pb-2 border-bottom">
+        <form action="/action" method="POST">
+            <h2>Smart Home Control 
+                <button type="submit" class="btn  text-black px-3 " name="action" value="connect" width="1.75em" height="1.75em">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
                     <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
                 </svg>
-                Disonnect
+                Connect
                 </button>
-        </h2>
-    </form>
+                <button type="submit" class="btn  text-black px-3 " name="action" value="disconnect" width="1.75em" height="1.75em">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+                        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+                    </svg>
+                    Disonnect
+                    </button>
+            </h2>
+        </form>
+    </div>
+   
+    <!--Div para elementos de informacion-->
+    <div class="row justify-content-between">
+        <h3 class="py-3 col-12 text-center">Información de la casa</h3>
+        <div class="py-3 col-4 text-center border">
+            <h5>Temperatura</h5>
+            <div>Entrada</div>
+            <div>Comedor</div>
+            <div>Cocina</div>    
+        </div>
+        <div class="py-3 col-4 text-center border">
+            <h5>Cantidad de luz</h5>
+            <div>Entrada</div>
+            <div>Comedor</div>
+            <div>Cocina</div>  
+        </div>
+        <div class="py-3 col-4 text-center border">
+            <h5>Bateria</h5>
+            <div  class="row justify-content-between">
+                <div class="col-6" >Sensor Entrada</div>
+                <div class="col-6">Sensor Comedor</div>
+                <div class="col-6">Sensor Cocina</div>
+                <div class="col-6">Boton Sala</div>
+                <div class="col-6">Timbre</div>
+                <div class="col-6">Tableta</div>
+            </div> 
+        </div>
+        <div class="py-3 col-12 text-center border"> 
+            <div><h5 class="inline">Nivel tinaco</h5></div>   
+        </div>
+    </div>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
-        <form action="/action" method="POST">
-            <div class="col d-flex align-items-center border justify-content-center">
-                <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                    </svg>
-                    Encender luz
-                </button>
-                
-            </div>
-        </form>
+    <!--Div para elementos de control-->
+    <div class="row justify-content-between">
+        <h3 class="py-3 col-12 text-center">Luces / Interruptores</h3>
+        <div class="py-3 col-6 text-center border">
+            
+            <form action="/action" method="POST">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+                        </svg>
+                        Encender luz
+                    </button>
+                    
+                </div>
+            </form>
+            <form action="/action" method="POST">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+                        </svg>
+                        Encender luz
+                    </button>
+                    
+                </div>
+            </form>
+            <form action="/action" method="POST">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+                        </svg>
+                        Encender luz
+                    </button>
+                    
+                </div>
+            </form>   
+            <form action="/action" method="POST">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+                        </svg>
+                        Encender luz
+                    </button>
+                    
+                </div>
+            </form>
+        </div>
+        <div class="py-3 col-6 text-center border">
+            <form action="/action" method="POST">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+                        </svg>
+                        Encender luz
+                    </button>
+                    
+                </div>
+            </form>
+            <form action="/action" method="POST">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+                        </svg>
+                        Encender luz
+                    </button>
+                    
+                </div>
+            </form>
+            <form action="/action" method="POST">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+                        </svg>
+                        Encender luz
+                    </button>
+                    
+                </div>
+            </form>
+            <form action="/action" method="POST">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+                        </svg>
+                        Encender luz
+                    </button>
+                    
+                </div>
+            </form>
+        </div>
+        
     </div>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
-        <form action="/action" method="POST">
-            <div class="col d-flex align-items-center border justify-content-center">
-                <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOff" width="1.75em" height="1.75em">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                    </svg>
-                    Apagar luz
-                </button>
-                
-            </div>
-        </form>
-    </div>
+
 </div>
-
-<%- include('partials/footer.ejs'); -%>
