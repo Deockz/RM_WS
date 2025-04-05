@@ -1,156 +1,139 @@
 <%- include('partials/header.ejs'); -%>
 
 
-<div class="px-4 py-2 m-3" id="icon-grid">
+    <div class="pt-1 mx-1 " id="icon-grid">
+    
+        <!--form para elementos de control-->
+        <form class="infoContainer " action="/action" method="POST">
+            <h3 class="text-center">Luces / Sensores / Interruptores</h3>
+            <div class="devicesBox">
+                <% devices.forEach(element => { %>
+                    <% if (element.type == 'luces' ) { %>            
+                        <button class="deviceButton rounded-3 " name="turnDevice" value="<%= element.entity %>"> 
+                            <p class="smallText deviceStatus">
+                                
+                                <% if (element.value == 1) { %>
+                                on
+                                <% } else{%>
+                                    off
+                                <% } %>
+                            </p>
+                            <svg class="deviceIcon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-lightbulb-fill" viewBox="0 0 16 16">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5"/>
+                            </svg> 
+                            <p class="deviceName"><%= element.name %></p>
+                        </button>
+                    <% } %>
+                    <% if (element.type == 'sensor' ) { %>            
+                        <button class="deviceButton rounded-3 " name="turnDevice" value="<%= element.entity %>"> 
+                            <p class="smallText deviceStatus">
+                                
+                                <% if (element.value == 1) { %>
+                                on
+                                <% } else{%>
+                                    off
+                                <% } %>
+                            </p>
+                            <svg class="deviceIcon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-wifi" viewBox="0 0 16 16">
+                            <path d="M15.384 6.115a.485.485 0 0 0-.047-.736A12.44 12.44 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.52.52 0 0 0 .668.05A11.45 11.45 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.148.49.13.668-.049"/>
+                            <path d="M13.229 8.271a.482.482 0 0 0-.063-.745A9.46 9.46 0 0 0 8 6c-1.905 0-3.68.56-5.166 1.526a.48.48 0 0 0-.063.745.525.525 0 0 0 .652.065A8.46 8.46 0 0 1 8 7a8.46 8.46 0 0 1 4.576 1.336c.206.132.48.108.653-.065m-2.183 2.183c.226-.226.185-.605-.1-.75A6.5 6.5 0 0 0 8 9c-1.06 0-2.062.254-2.946.704-.285.145-.326.524-.1.75l.015.015c.16.16.407.19.611.09A5.5 5.5 0 0 1 8 10c.868 0 1.69.201 2.42.56.203.1.45.07.61-.091zM9.06 12.44c.196-.196.198-.52-.04-.66A2 2 0 0 0 8 11.5a2 2 0 0 0-1.02.28c-.238.14-.236.464-.04.66l.706.706a.5.5 0 0 0 .707 0l.707-.707z"/>
+                            </svg>
+                            <p class="deviceName"><%= element.name %></p>
+                        </button>
+                    <% } %>
+                    <% if (element.type == 'relevador' ) { %>            
+                        <button class="deviceButton rounded-3 " name="turnDevice" value="<%= element.entity %>"> 
+                            <p class="smallText deviceStatus">
+                                
+                                <% if (element.value == 1) { %>
+                                on
+                                <% } else{%>
+                                    off
+                                <% } %>
+                            </p>
+                            <svg class="deviceIcon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-plug" viewBox="0 0 16 16">
+                            <path d="M6 0a.5.5 0 0 1 .5.5V3h3V.5a.5.5 0 0 1 1 0V3h1a.5.5 0 0 1 .5.5v3A3.5 3.5 0 0 1 8.5 10c-.002.434-.01.845-.04 1.22-.041.514-.126 1.003-.317 1.424a2.08 2.08 0 0 1-.97 1.028C6.725 13.9 6.169 14 5.5 14c-.998 0-1.61.33-1.974.718A1.92 1.92 0 0 0 3 16H2c0-.616.232-1.367.797-1.968C3.374 13.42 4.261 13 5.5 13c.581 0 .962-.088 1.218-.219.241-.123.4-.3.514-.55.121-.266.193-.621.23-1.09.027-.34.035-.718.037-1.141A3.5 3.5 0 0 1 4 6.5v-3a.5.5 0 0 1 .5-.5h1V.5A.5.5 0 0 1 6 0M5 4v2.5A2.5 2.5 0 0 0 7.5 9h1A2.5 2.5 0 0 0 11 6.5V4z"/>
+                            </svg>
+                            <p class="deviceName"><%= element.name %></p>
+                        </button>
+                    <% } %>
+                
+                <% }) %>
+            </div>
+        </form>  
 
-    <!--Div para barra de titulo-->
-    <div class="pb-2 border-bottom">
-        <form action="/action" method="POST">
-            <h2>Smart Home Control 
-                <button type="submit" class="btn  text-black px-3 " name="action" value="connect" width="1.75em" height="1.75em">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                    <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                </svg>
-                Connect
-                </button>
-                <button type="submit" class="btn  text-black px-3 " name="action" value="disconnect" width="1.75em" height="1.75em">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+        <!--Div para elementos de informacion-->
+        <div class="infoContainer" >
+            <h3 class="text-center">Informacion</h3>
+            <div class="devicesBox">
+                <% devices.forEach(element => { %>
+                    <% if (element.type == 'luz' ) { %>            
+                        <div class="deviceLabel rounded-3 "> 
+                            <p class="smallText deviceStatus">
+                                <%= element.room %>
+                            </p>
+                            <svg class="deviceIcon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-brightness-high-fill" viewBox="0 0 16 16">
+                                <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+                            </svg>
+                            <p class="deviceName"><%= element.value %></p>
+                        </div>
+                    <% } %>
+                    <% if (element.type == 'temperatura' ) { %>            
+                        <div class="deviceLabel rounded-3 "> 
+                            <p class="smallText deviceStatus">
+                                <%= element.room %>
+                            </p>
+                            <svg class="deviceIcon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-thermometer-half" viewBox="0 0 16 16">
+                                <path d="M9.5 12.5a1.5 1.5 0 1 1-2-1.415V6.5a.5.5 0 0 1 1 0v4.585a1.5 1.5 0 0 1 1 1.415"/>
+                                <path d="M5.5 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0zM8 1a1.5 1.5 0 0 0-1.5 1.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0l-.166-.15V2.5A1.5 1.5 0 0 0 8 1"/>
+                            </svg>
+                            <p class="deviceName"><%= element.value %></p>
+                        </div>
+                    <% } %>
+                    <% if (element.type == 'bateria' ) { %>            
+                        <div class="deviceLabel rounded-3 "> 
+                            <p class="smallText deviceStatus">
+                                <%= element.name %>
+                            </p>
+                            <svg class="deviceIcon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-battery-half" viewBox="0 0 16 16">
+                                <path d="M2 6h5v4H2z"/>
+                                <path d="M2 4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm10 1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm4 3a1.5 1.5 0 0 1-1.5 1.5v-3A1.5 1.5 0 0 1 16 8"/>
+                            </svg>
+                            <p class="deviceName"><%= element.value %></p>
+                        </div>
+                    <% } %>
+                    
+                
+                <% }) %>
+                <div class="deviceLabel rounded-3 "> 
+                    <p class="smallText deviceStatus">
+                        Nivel Agua
+                    </p>
+                    <svg class="deviceIcon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-moisture" viewBox="0 0 16 16">
+                        <path d="M13.5 0a.5.5 0 0 0 0 1H15v2.75h-.5a.5.5 0 0 0 0 1h.5V7.5h-1.5a.5.5 0 0 0 0 1H15v2.75h-.5a.5.5 0 0 0 0 1h.5V15h-1.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 .5-.5V.5a.5.5 0 0 0-.5-.5zM7 1.5l.364-.343a.5.5 0 0 0-.728 0l-.002.002-.006.007-.022.023-.08.088a29 29 0 0 0-1.274 1.517c-.769.983-1.714 2.325-2.385 3.727C2.368 7.564 2 8.682 2 9.733 2 12.614 4.212 15 7 15s5-2.386 5-5.267c0-1.05-.368-2.169-.867-3.212-.671-1.402-1.616-2.744-2.385-3.727a29 29 0 0 0-1.354-1.605l-.022-.023-.006-.007-.002-.001zm0 0-.364-.343zm-.016.766L7 2.247l.016.019c.24.274.572.667.944 1.144.611.781 1.32 1.776 1.901 2.827H4.14c.58-1.051 1.29-2.046 1.9-2.827.373-.477.706-.87.945-1.144zM3 9.733c0-.755.244-1.612.638-2.496h6.724c.395.884.638 1.741.638 2.496C11 12.117 9.182 14 7 14s-4-1.883-4-4.267"/>
                     </svg>
-                    Disonnect
-                    </button>
-            </h2>
-        </form>
-    </div>
-   
-    <!--Div para elementos de informacion-->
-    <div class="row justify-content-between">
-        <h3 class="py-3 col-12 text-center">Información de la casa</h3>
-        <div class="py-3 col-4 text-center border">
-            <h5>Temperatura</h5>
-            <div>Entrada</div>
-            <div>Comedor</div>
-            <div>Cocina</div>    
-        </div>
-        <div class="py-3 col-4 text-center border">
-            <h5>Cantidad de luz</h5>
-            <div>Entrada</div>
-            <div>Comedor</div>
-            <div>Cocina</div>  
-        </div>
-        <div class="py-3 col-4 text-center border">
-            <h5>Bateria</h5>
-            <div  class="row justify-content-between">
-                <div class="col-6" >Sensor Entrada</div>
-                <div class="col-6">Sensor Comedor</div>
-                <div class="col-6">Sensor Cocina</div>
-                <div class="col-6">Boton Sala</div>
-                <div class="col-6">Timbre</div>
-                <div class="col-6">Tableta</div>
-            </div> 
-        </div>
-        <div class="py-3 col-12 text-center border"> 
-            <div><h5 class="inline">Nivel tinaco</h5></div>   
-        </div>
-    </div>
-
-    <!--Div para elementos de control-->
-    <div class="row justify-content-between">
-        <h3 class="py-3 col-12 text-center">Luces / Interruptores</h3>
-        <div class="py-3 col-6 text-center border">
+                    <p class="deviceName">80%</p>
+                </div>
+            </div>
             
-            <form action="/action" method="POST">
-                <div class="col d-flex align-items-center justify-content-center">
-                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                        </svg>
-                        Encender luz
-                    </button>
-                    
-                </div>
-            </form>
-            <form action="/action" method="POST">
-                <div class="col d-flex align-items-center justify-content-center">
-                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                        </svg>
-                        Encender luz
-                    </button>
-                    
-                </div>
-            </form>
-            <form action="/action" method="POST">
-                <div class="col d-flex align-items-center justify-content-center">
-                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                        </svg>
-                        Encender luz
-                    </button>
-                    
-                </div>
-            </form>   
-            <form action="/action" method="POST">
-                <div class="col d-flex align-items-center justify-content-center">
-                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                        </svg>
-                        Encender luz
-                    </button>
-                    
-                </div>
-            </form>
-        </div>
-        <div class="py-3 col-6 text-center border">
-            <form action="/action" method="POST">
-                <div class="col d-flex align-items-center justify-content-center">
-                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                        </svg>
-                        Encender luz
-                    </button>
-                    
-                </div>
-            </form>
-            <form action="/action" method="POST">
-                <div class="col d-flex align-items-center justify-content-center">
-                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                        </svg>
-                        Encender luz
-                    </button>
-                    
-                </div>
-            </form>
-            <form action="/action" method="POST">
-                <div class="col d-flex align-items-center justify-content-center">
-                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                        </svg>
-                        Encender luz
-                    </button>
-                    
-                </div>
-            </form>
-            <form action="/action" method="POST">
-                <div class="col d-flex align-items-center justify-content-center">
-                    <button type="submit" class="btn  text-black px-3 " name="action" value="cuartoOn" width="1.75em" height="1.75em">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                        </svg>
-                        Encender luz
-                    </button>
-                    
-                </div>
-            </form>
-        </div>
-        
-    </div>
+            
 
-</div>
+
+        </div>
+    </div>
+    <script src="\js\app.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on('mensaje', (msg) => {
+            console.log('Servidor dice:', msg);
+            document.getElementById('mensaje').textContent = msg;
+        });
+
+        socket.emit('cliente_dice', 'Hola servidor desde el navegador!');
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>
